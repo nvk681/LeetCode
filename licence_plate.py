@@ -18,7 +18,6 @@ def licenseKeyFormatting(s: str, k: int) -> str:
                     items.insert((extra_index + reminder + (i*k)), "-")
                     extra_index += 1
         string = ""
-        string.join(items) 
         return string.join(items) 
 
 print(licenseKeyFormatting("a0001afds-", 4))
