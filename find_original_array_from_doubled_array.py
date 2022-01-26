@@ -3,7 +3,6 @@ class Solution:
         if len(changed)%2 != 0:
             return []
         changed.sort()
-        c = Counter([1,2,3])
         new_one = []
         zero_count = 0
         if changed.count(0)%2 == 1:
