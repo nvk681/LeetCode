@@ -2,19 +2,24 @@ class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         if len(s) <= 1:
             return len(s)
-        l = list(s)
-        temp = list()
-        max_lenght = 0
-        for i in l:
-            if i in temp:
-                current_lenght = len(temp)
-                max_lenght = max_lenght if current_lenght < max_lenght else current_lenght 
-                while i in temp:
-                    temp.pop(0)
-                temp.append(i)
-            else : 
-                temp.append(i)
-        return max_lenght
+        current_lenght, max_lenght = 0, 0
+        pool_of_characters = []
+        for i in s:
+            if i not in pool_of_characters:
+                pool_of_characters.append(i)
+                current_lenght += 1
+            else: 
+                if max_lenght < current_lenght:
+                    max_lenght = current_lenght
+                while i in pool_of_characters:
+                    pool_of_characters.pop(0)
+                pool_of_characters.append(i)
+                current_lenght = len(pool_of_characters)
+        return max_lenght if max_lenght > current_lenght else current_lenght
+
 
 s = Solution()
-s.lengthOfLongestSubstring("aq")
+print(s.lengthOfLongestSubstring("aq"))
+print(s.lengthOfLongestSubstring("abcabcbb"))
+print(s.lengthOfLongestSubstring("bbbbb"))
+print(s.lengthOfLongestSubstring("pwwkew"))
