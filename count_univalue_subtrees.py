@@ -5,8 +5,9 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isUnivalTree(self, root) -> bool:
-        if root is None: return True
+    def countUnivalSubtrees(self, root) -> int:
+        if root is None: return 0
+        self.global_count = 0
         def pre_order_parsing(node, val):
             if node is None: return True
             if node.val != val:
@@ -17,4 +18,13 @@ class Solution:
             else:
                 return False
             return left and right
-        return pre_order_parsing(root, root.val)
+        def parse_all_nodes(node):
+            if node is not None:
+                if pre_order_parsing(node, node.val):
+                    self.global_count += 1
+                if node.left is not None:
+                    parse_all_nodes(node.left)
+                if node.right is not None:
+                    parse_all_nodes(node.right)
+        parse_all_nodes(root)
+        return self.global_count
